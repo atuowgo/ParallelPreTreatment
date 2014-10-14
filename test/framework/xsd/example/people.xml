@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<people id="1"
+        xmlns="http://www.w3school.com.cn"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.w3school.com.cn people.xsd">
+    <firstName>adam</firstName>
+    <lastName>chen</lastName>
+    <addr>华南农业大学五山区5栋126</addr>
+    <age>23</age>
+    <phone>11111111111</phone>
+</people>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.w3school.com.cn"
+        xmlns="http://www.w3school.com.cn"
+        elementFormDefault="qualified">
+
+    <xs:simpleType name="pathType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="continueToType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="featureNumType">
+        <xs:restriction base="xs:integer"/>
+    </xs:simpleType>
+    <xs:simpleType name="fetureNumType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="markType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="trainPercentageType">
+        <xs:restriction base="xs:integer">
+            <xs:maxInclusive value="100"/>
+            <xs:minInclusive value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="jobNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:attributeGroup name="mainAttr">
+        <xs:attribute name="name" type="nameType"/>
+        <xs:attribute name="continueto" type="continueToType"/>
+    </xs:attributeGroup>
+
+
+    <xs:complexType name="startElementType">
+        <xs:complexContent>
+            <xs:restriction base="xs:string">
+                <xs:attribute name="continueto" type="continueToType"/>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="taskElementType">
+        <xs:complexContent>
+            <xs:restriction base="xs:string">
+                <xs:attributeGroup ref="mainAttr"/>
+                <xs:attribute name="trainPecentage" type="trainPercentageType"/>
+                <xs:attribute name="fetureNum" type="fetureNumType"/>
+                <xs:attribute name="featureNum" type="featureNumType"/>
+                <xs:attribute name="markStr" type="markType"/>
+                <xs:attribute name="localOutputPath" type="pathType"/>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="endElementType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:complexType name="jobType">
+        <xs:sequence>
+            <xs:element name="start" type="startElementType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="task" type="taskElementType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="end" type="endElementType" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="jobNameType"/>
+    </xs:complexType>
+
+    <xs:element name="job" type="jobType"/>
+
+</xs:schema>

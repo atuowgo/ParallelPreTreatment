@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.w3school.com.cn"
+        xmlns="http://www.w3school.com.cn"
+        elementFormDefault="qualified">
+
+    <!--定义基本类型-->
+    <xs:simpleType name="idType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{1,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="firstNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="lastNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="ageType">
+        <xs:restriction base="xs:integer"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="addrType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="phoneType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="1[0-9]{10,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--定义people类型-->
+    <xs:complexType name="peopleInfoType">
+        <xs:all>
+            <xs:element name="firstName" type="firstNameType" minOccurs="1"/>
+            <xs:element name="lastName" type="lastNameType" minOccurs="1"/>
+            <xs:element name="age" type="ageType" minOccurs="0"/>
+            <xs:element name="addr" type="addrType" minOccurs="0"/>
+            <xs:element name="phone" type="phoneType" minOccurs="0"/>
+        </xs:all>
+        <xs:attribute name="id" type="idType" use="required"/>
+    </xs:complexType>
+
+    <!--people元素-->
+    <xs:element name="people" type="peopleInfoType"/>
+
+
+</xs:schema>

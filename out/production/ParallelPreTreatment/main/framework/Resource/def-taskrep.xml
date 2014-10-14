@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<taskRepository>
+    <!--测试-->
+    <task worker = "main.framework.Worker.Default.TestDefaultW"
+          runner = "main.framework.Task.Default.DefaultTask"
+          optioner = "main.framework.Options.Default.TestDefaultOp"
+          name = "defTest"
+          inputPath = "/home/adam/dev/tmp/mahout"
+          outputPath = "/ParallelPreProcess/cleanTaskOut"
+          tmpPath = "/home/adam/dev/tmp/mahoutCleanOut"
+          age = "23">
+    </task>
+
+    <!--清除html标签-->
+    <task worker = "main.framework.Worker.Default.DefHtmlCleanWorker"
+          runner = "main.framework.Task.Default.DefaultTask"
+          optioner = "main.framework.Options.Default.DefHtmlCleanOptions"
+          name = "defClean"
+          inputPath = "/home/adam/dev/tmp/pretrement/origin"
+          outputPath = "/ParallelPreTreatment/defClean"
+          tmpPath = "/home/adam/dev/tmp/pretrement/defClean"
+          htmlThreater = "main.core.Treatment.Default.DefHtmlTreater"
+          trainPecentage = "50">
+          </task>
+
+    <!--标准分词，统计属性-->
+    <task worker="main.framework.Worker.Default.DefHtmlTokenWorker"
+          runner="main.framework.Task.Default.DefaultTask"
+          optioner="main.framework.Options.Default.DefHtmlTokenOptions"
+          name="defToken"
+          inputPath="/ParallelPreTreatment/defClean"
+          outputPath="/ParallelPreTreatment/defToken"
+          tmpPath="/ParallelPreTreatment/tmp/defTokenTmp">
+    </task>
+
+    <!--生成特征词集,用DF-->
+    <task worker="main.framework.Worker.Default.DefDFFetureWoker"
+          runner="main.framework.Task.Default.DefaultTask"
+          optioner="main.framework.Options.Default.DefDFFetureOptions"
+          name="defDFFeature"
+          inputPath="/ParallelPreTreatment/defToken"
+          outputPath="/ParallelPreTreatment/defFeature"
+          tmpPath="/ParallelPreTreatment/tmp/defDFFeature"
+          fetureNum = "8000">
+    </task>
+
+    <!--生成特征词集，用ECE-->
+    <task worker="main.framework.Worker.Default.DefECEFeatureWoker"
+          runner="main.framework.Task.Default.DefaultTask"
+          optioner="main.framework.Options.Default.DefECEFeatureOptions"
+          name="defECEFeature"
+          inputPath="/ParallelPreTreatment/defToken"
+          outputPath="/ParallelPreTreatment/defFeature"
+          tmpPath="/ParallelPreTreatment/tmp/defECEFeature"
+          featureNum = "8000">
+    </task>
+
+    <!--生成特征词集，用WET-->
+    <task worker="main.framework.Worker.Default.DefECEFeatureWoker"
+          runner="main.framework.Task.Default.DefaultTask"
+          optioner="main.framework.Options.Default.DefECEFeatureOptions"
+          name="defWETFeature"
+          inputPath="/ParallelPreTreatment/defToken"
+          outputPath="/ParallelPreTreatment/defFeature"
+          tmpPath="/ParallelPreTreatment/tmp/defWETFeature"
+          featureNum = "8000">
+    </task>
+
+    <!--生成词频矩阵-->
+    <task worker="main.framework.Worker.Default.DefMatrixWorker"
+          runner="main.framework.Task.Default.DefaultTask"
+          optioner="main.framework.Options.Default.DefMatrixOptions"
+          name="defMatrix"
+          inputPath="/ParallelPreTreatment/defToken"
+          outputPath="/ParallelPreTreatment/defMatrix"
+          tmpPath="/ParallelPreTreatment/tmp/defMatrix"
+          featurePath="/ParallelPreTreatment/defFeature"
+          >
+        <!--featurePath="/ParallelPreTreatment/defDFFeture"-->
+    </task>
+
+    <!--NB分类 输出NB模型和召回率/错误率结果-->
+    <task worker="main.framework.Worker.Default.DefNBWorker"
+          runner="main.framework.Task.Default.DefaultTask"
+          optioner="main.framework.Options.Default.DefNBOptinos"
+          name="defNB"
+          inputPath="/ParallelPreTreatment/defMatrix"
+          outputPath="/ParallelPreTreatment/defNB"
+          tmpPath="/ParallelPreTreatment/tmp/defNB"
+          testTermPath="/ParallelPreTreatment/terms/test"
+          localOutputPath=""
+          markStr="defNB__8000"
+          >
+    </task>
+
+
+</taskRepository>

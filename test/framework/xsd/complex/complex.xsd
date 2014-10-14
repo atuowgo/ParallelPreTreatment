@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.w3school.com.cn"
+        xmlns="http://www.w3school.com.cn"
+        elementFormDefault="qualified">
+
+    <!--type是自己定义的类型，不是elment，只能在里面定义下级的元素或者本身的属性，及做限制-->
+
+    <!--顺序固定的复杂类型，只包含元素-->
+    <xs:complexType name="personInfo">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--顺序固定的复杂类型，可继承(需要在complexContent)，只包含元素-->
+    <xs:complexType name="wholeInfo">
+        <xs:complexContent>
+            <xs:extension base="personInfo">
+                <xs:sequence>
+                    <xs:element name="add" type="xs:string"/>
+                    <xs:element name="date" type="xs:date"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!--空内容的元素-->
+    <xs:complexType name="product">
+        <xs:complexContent>
+            <xs:restriction base="xs:string">
+                <xs:attribute name="price" type="xs:double"/>
+                <xs:attribute name="produceId" type="xs:string"/>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="complexAttr">
+        <xs:attribute name="attr1" type="xs:string"/>
+        <xs:attribute name="attr2" type="xs:string"/>
+    </xs:complexType>
+
+    <!--仅含内容的元素-->
+    <xs:complexType name="shoeSize">
+        <xs:simpleContent>
+            <xs:extension base="xs:integer">
+                <xs:attribute name="size" type="xs:double"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="letterType" mixed="true">
+        <xs:sequence>
+            <xs:element name="name" type="personInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--元素组-->
+    <xs:group name="groupElement">
+        <xs:all>
+            <xs:element name="firstName" type="xs:string"></xs:element>
+            <xs:element name="lastName" type="xs:string"></xs:element>
+        </xs:all>
+    </xs:group>
+
+    <!--组合-->
+    <xs:complexType name="info">
+        <xs:sequence>
+            <xs:group ref="groupElement"/>
+        </xs:sequence>
+        <!--属性要加在元素后面-->
+        <xs:attribute name="att1" type="xs:string"></xs:attribute>
+    </xs:complexType>
+
+    <xs:attributeGroup name="groupAttr">
+        <xs:attribute name="attr1" type="xs:string"/>
+        <xs:attribute name="attr2" type="xs:string"/>
+    </xs:attributeGroup>
+
+    <xs:complexType name="element1">
+        <xs:attributeGroup ref="groupAttr"/>
+    </xs:complexType>
+
+    <xs:element name="myElment" type="element1"/>
+</xs:schema>

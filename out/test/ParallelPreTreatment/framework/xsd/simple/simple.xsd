@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.w3school.com.cn"
+        xmlns="http://www.w3school.com.cn"
+        elementFormDefault="qualified">
+
+    <!--属性-->
+    <xs:attribute name="att1" type="xs:integer"></xs:attribute>
+    <xs:element name="simple">
+        <xs:complexType>
+            <xs:attribute name="url" type="xs:string" default="http://www.gogle.com"></xs:attribute>
+            <xs:attribute name="paramaterNum" type="xs:integer" fixed="40"></xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <!--取值受限制的元素，int-->
+    <xs:element name="age">
+        <xs:simpleType>
+            <xs:restriction base="xs:integer">
+                <xs:minInclusive value="0"></xs:minInclusive>
+                <xs:maxInclusive value="100"></xs:maxInclusive>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <!--取值受限制的元素，enumeration-->
+    <!--<car>BMW</car>-->
+    <xs:element name="car">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="BMW"></xs:enumeration>
+                <xs:enumeration value="Audi"></xs:enumeration>
+                <xs:enumeration value="Golf"></xs:enumeration>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <!--自定义类型-->
+    <!--<myType>Type1</myType>-->
+    <xs:element name="myType" type="myType"></xs:element>
+    <xs:simpleType name="myType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Type1"></xs:enumeration>
+            <xs:enumeration value="Type2"></xs:enumeration>
+            <xs:enumeration value="Type3"></xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--自定义类型，值为模式,正则表达式-->
+    <!--（）*：零个或多个;（）+：至少一个,A|B：A或者B;（）{8}：出现多少次-->
+    <!--<letter></letter>-->
+    <xs:element name="letter" type="letter"></xs:element>
+    <xs:simpleType name="letter">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z][a-z][a-z][xyz][0-9]([0-9]*)"></xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--对空白的限制-->
+    <!--preserve：不会移除任何空格，replace：移除任何空格,collapse:只有一个空格-->
+    <xs:simpleType name="white">
+        <xs:restriction>
+            <xs:whiteSpace value="preserve"></xs:whiteSpace>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--长度的限定-->
+    <xs:simpleType name="password">
+        <xs:restriction>
+            <xs:length value="8"></xs:length>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

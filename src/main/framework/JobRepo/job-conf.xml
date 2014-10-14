@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--<job name="defJob"-->
+<!--xmlns="http://www.w3school.com.cn"-->
+<!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--xsi:schemaLocation="http://www.w3school.com.cn jobConf.xsd">-->
+<!--<start continueto="defTest"></start>-->
+<!--<task name="defTest" continueto="defClean"></task>-->
+<!--<task name="defClean" trainPecentage="60" continueto="defToken"></task>-->
+
+<!--<task name="defToken" continueto="defDFFeature"></task>-->
+<!--<task name="defDFFeature" fetureNum="20000" continueto="defMatrix"></task>-->
+
+<!--<task name="defMatrix" continueto="defNB"></task>-->
+<!--<task name="defNB"-->
+<!--markStr="defNB_DF_20000"-->
+<!--localOutputPath="/home/adam/dev/tmp/mahoutLocalOut/df"-->
+<!--continueto="end"></task>-->
+<!--<end></end>-->
+<!--</job>-->
+
+
+<job name="defJob"
+xmlns="http://www.w3school.com.cn"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.w3school.com.cn jobConf.xsd">
+    <start continueto="defTest"></start>
+    <task name="defTest" continueto="defClean"></task>
+    <task name="defClean" trainPecentage="50" continueto="defToken"></task>
+
+    <task name="defToken" continueto="defECEFeature"></task>
+    <task name="defECEFeature" featureNum="100" continueto="defMatrix"></task>
+
+    <task name="defMatrix" continueto="defNB"></task>
+    <task name="defNB"
+          markStr="defNB_ECE_100"
+          localOutputPath="/home/adam/dev/tmp/mahoutLocalOut/ece"
+          continueto="end"></task>
+    <end></end>
+</job>

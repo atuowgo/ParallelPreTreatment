@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<hadoop>
+    <hadoop-home>
+        /home/adam/dev/hadoop/hadoop12
+    </hadoop-home>
+    <hadoop-hdfs>
+        localhost:9000
+    </hadoop-hdfs>
+</hadoop>

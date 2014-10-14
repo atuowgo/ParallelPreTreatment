@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<job name="defJob">
+    <start continueto="defTest"></start>
+    <task name="defTest" continueto="defClean"></task>
+    <task name="defClean" continueto="defToken"></task>
+
+    <task name="defToken" continueto="defDFFeature"></task>
+    <task name="defDFFeature" fetureNum="20000" continueto="defMatrix"></task>
+
+    <task name="defMatrix" continueto="defNB"></task>
+    <task name="defNB"
+          markStr="defNB_DF_20000"
+          localOutputPath="/home/adam/dev/tmp/mahoutLocalOut/df"
+          continueto="end"></task>
+    <end></end>
+</job>
+
+<?xml version="1.0"?>
+<job name="defJob">
+    <start continueto="defTest"></start>
+    <task name="defTest" continueto="defClean"></task>
+    <task name="defClean" continueto="defToken"></task>
+
+    <task name="defToken" continueto="defECEFeature"></task>
+    <task name="defECEFeature" featureNum="20000" continueto="defMatrix"></task>
+
+    <task name="defMatrix" continueto="defNB"></task>
+    <task name="defNB"
+          markStr="defNB_ECE_20000"
+          localOutputPath="/home/adam/dev/tmp/mahoutLocalOut/ece"
+          continueto="end"></task>
+    <end></end>
+</job>
